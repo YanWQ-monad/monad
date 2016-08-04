@@ -2,7 +2,7 @@ Build Tree
 ==========
 You can build binary tree by any two traversal.
 --------------------------------------------------
-### Build tree by Pre-Order and In-Order
+### Build tree by pre-order and in-order
 #### Description
 	"By pre_order and in_order.cpp" is an example. It reads pre-order and in-order about the tree, and then it builds a tree by linked list. Finally, it output the post-order about the tree.
 #### Sample Input
@@ -10,7 +10,7 @@ You can build binary tree by any two traversal.
 	2 1 3 4 6 5
 #### Sample Output
 	2 3 1 6 5 4
-### Build tree by In-Order and Post-Order
+### Build tree by in-order and post-order
 #### Description
 	"By in_order and post_order.cpp" is an example. It reads in-order and post-order about the tree, and then it builds a tree by linked list. Finally, it output the pre-order about the tree.
 #### Sample Input
