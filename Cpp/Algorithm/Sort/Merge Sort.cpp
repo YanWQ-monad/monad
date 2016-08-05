@@ -19,7 +19,8 @@ void mergesort(T *begin,T *end,T *Temp) {
 	for   (int i=0;i<=size;i++) begin[i]=Temp[i];
 }
 
-int n,a[100],temp[100];
+const int MAXN = 100;
+int n,a[MAXN],temp[MAXN];
 int main() {
 	scanf("%d",&n);
 	for (int i=0;i<n;i++)
