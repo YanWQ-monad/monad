@@ -2,7 +2,7 @@
 // The worst time complexity:   O(n log n)
 // The best time complexity:    O(n)
 // The average time complexity: O(n log n)
-// The worst space Complexity:  O(n)
+// The worst space complexity:  O(n)
 
 #include <cstdio>
 
