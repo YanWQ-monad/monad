@@ -18,7 +18,7 @@ void read() {
 void print() {
 	for (int i=0;i<n;i++)
 		printf("%d ",s[i]);
-	printf("\n");
+	puts("");
 }
 long long factorial(int n) {
 	long long sum=1;
@@ -27,17 +27,15 @@ long long factorial(int n) {
 	return sum;
 }
 void work() {
-	for (int x=n;x>1;x--) {
+	for (int x=n;x;x--) {
 		int mod=(k/factorial(x-1))%x,i;
 		for (i=1;used[i];i++);
 		for (int j=0;j<mod;j+=!used[i],i++);
 		for (;used[i];i++);
 		used[s[n-x]=i]=true;
 	}
-	for (int i=0;used[i];s[n-1]=++i);
 	print();
 }
-
 int main() {
 	freopen("1248.in","r",stdin);
 	freopen("1248.out","w",stdout);
