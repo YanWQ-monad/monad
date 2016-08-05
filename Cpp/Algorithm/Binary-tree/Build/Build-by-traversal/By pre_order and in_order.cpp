@@ -23,7 +23,7 @@ void read() {
 }
 
 TREE* build(int Pb,int Pe,int Ib,int Ie) {
-	if (Pb>Pe) return NULL;
+	if (Pb>Pe || Ib>Ie) return NULL;
 	TREE *node=new TREE;
 	int root=Pre[Pb],p=Ib;
 	node->data=root;
