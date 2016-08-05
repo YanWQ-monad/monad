@@ -7,7 +7,7 @@
 #include <cstdio>
 
 template<typename T> bool default_compare(T lhs,T rhs) {
-	return lhs<rhs;
+	return lhs<=rhs;
 }
 template<typename T>
 void mergesort(T *begin,T *end,T *Temp,bool(*mscomp)(T,T)=&default_compare) {
