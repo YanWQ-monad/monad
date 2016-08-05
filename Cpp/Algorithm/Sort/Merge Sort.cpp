@@ -6,14 +6,17 @@
 
 #include <cstdio>
 
+template<typename T> bool default_compare(T lhs,T rhs) {
+	return lhs<rhs;
+}
 template<typename T>
-void mergesort(T *begin,T *end,T *Temp) {
+void mergesort(T *begin,T *end,T *Temp,bool(*mscomp)(T,T)=&default_compare) {
 	if (begin>=end) return;
 	int size=end-begin,mid=size>>1;
 	mergesort(begin,&begin[mid],Temp);
 	mergesort(&begin[mid+1],end,&Temp[mid+1]);
 	int l=0,r=mid+1,now=0;
-	while (l<=mid && r<=size)   Temp[now++]=begin[l]<begin[r]? begin[l++]:begin[r++];
+	while (l<=mid && r<=size)   Temp[now++]=mscomp(begin[l],begin[r])? begin[l++]:begin[r++];
 	while (l<=mid)              Temp[now++]=begin[l++];
 	while (r<=size)             Temp[now++]=begin[r++];
 	for   (int i=0;i<=size;i++) begin[i]=Temp[i];
