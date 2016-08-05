@@ -7,13 +7,10 @@ void mergesort(T *begin,T *end,T *Temp) {
 	mergesort(begin,&begin[mid],Temp);
 	mergesort(&begin[mid+1],end,&Temp[mid+1]);
 	int l=0,r=mid+1,now=0;
-	while (l<=mid && r<=size) {
-		Temp[now++]=begin[l]<begin[r]? begin[l++]:begin[r++];
-	}
-	while (l<=mid)  Temp[now++]=begin[l++];
-	while (r<=size) Temp[now++]=begin[r++];
-	for (int i=0;i<=size;i++)
-		begin[i]=Temp[i];
+	while (l<=mid && r<=size)   Temp[now++]=begin[l]<begin[r]? begin[l++]:begin[r++];
+	while (l<=mid)              Temp[now++]=begin[l++];
+	while (r<=size)             Temp[now++]=begin[r++];
+	for   (int i=0;i<=size;i++) begin[i]=Temp[i];
 }
 
 int n,a[100],temp[100];
