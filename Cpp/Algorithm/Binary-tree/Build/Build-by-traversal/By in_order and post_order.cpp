@@ -22,7 +22,7 @@ void read() {
 }
 
 TREE* build(int Ib,int Ie,int Pb,int Pe) {
-	if (Ib>Ie) return NULL;
+	if (Ib>Ie || Pb>Pe) return NULL;
 	TREE *node=new TREE;
 	int root=Post[Pe],p=Ib;
 	node->data=root;
