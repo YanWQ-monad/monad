@@ -21,15 +21,15 @@ void read() {
 	n=i/2;
 }
 
-TREE* build(int Pb,int Pe,int Ib,int Ie) {
-	if (Pb>Pe) return NULL;
+TREE* build(int Ib,int Ie,int Pb,int Pe) {
+	if (Ib>Ie) return NULL;
 	TREE *node=new TREE;
-	int root=Post[Ie],p=Pb;
+	int root=Post[Pe],p=Ib;
 	node->data=root;
 	while (In[p]!=root) p++;
-	int cur=p-Pb;
-	node->left  = build(Pb,p-1,Ib,Ib+cur-1);
-	node->right = build(p+1,Pe,Ib+cur,Ie-1);
+	int cur=p-Ib;
+	node->left  = build(Ib,p-1,Pb,Pb+cur-1);
+	node->right = build(p+1,Ie,Pb+cur,Pe-1);
 	return node;
 }
 
