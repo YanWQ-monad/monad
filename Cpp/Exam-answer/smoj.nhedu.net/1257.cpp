@@ -8,12 +8,6 @@ const int MAXN = 20;
 int min=2147483647;
 int used[1<<20];
 const int fan[20]={786432,917504,458752,229376,114688,57344,28672,14336,7168,3584,1792,896,448,224,112,56,28,14,7,3};
-bool check(int *bowl) {
-	for (int i=0;i<MAXN;i++)
-		if (bowl[i]==1)
-			return false;
-	return true;
-}
 void bfs(int temp) {
 	queue<int>p;
 	p.push(temp);
