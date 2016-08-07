@@ -5,11 +5,10 @@
 const int MAXN = 100010;
 int n,diff,PowerTop,a[MAXN],left[MAXN],right[MAXN];
 
-void InitLinkedList(int mid) {
-	int last=0,sum=0;
+void InitLinkedList() {
+	int last=0;
 	for (int i=1;i<MAXN;i++) {
 		if (!a[i]) continue;
-		sum+=a[i];
 		left[i]=last;
 		right[last]=i;
 		last=i;
@@ -68,8 +67,7 @@ int main() {
 		scanf("%d",&temp);
 		a[temp]++;
 	}
-	int mid=n/2;
-	InitLinkedList(mid);
+	InitLinkedList();
 	EnhancedSimulation();
 	printf("%d %d\n",right[0],left[PowerTop]);
 	return 0;
