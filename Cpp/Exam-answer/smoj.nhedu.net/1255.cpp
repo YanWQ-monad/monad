@@ -1,19 +1,15 @@
 // 1255.cpp
-#include <algorithm>
 #include <cstdio>
-#define min(x,y) (x+((y-x)&((y-x)>>31)))
+#define min(x,y) ((x)<(y)? (x):(y))
 
 const int MAXN = 100010;
-int n,power[MAXN],MaxPower,MinPower,diff;
-int PowerTop,a[MAXN],left[MAXN],right[MAXN];
+int n,diff,PowerTop,a[MAXN],left[MAXN],right[MAXN];
 
 void InitLinkedList(int mid) {
 	int last=0,sum=0;
 	for (int i=1;i<MAXN;i++) {
 		if (!a[i]) continue;
 		sum+=a[i];
-		if (sum>=mid && !MinPower) /MinPower=i;
-		if (sum>=mid+1 && !MaxPower) MaxPower=i;
 		left[i]=last;
 		right[last]=i;
 		last=i;
@@ -29,8 +25,8 @@ void LinkedRemove(int n) {
 	right[left[n]]=right[n];
 }
 void EnhancedSimulation() {
+	int MinQuan,MaxQuan,deal;
 	while (diff>3) {
-		int MinQuan,MaxQuan,deal;
 		MinQuan=a[right[0]];
 		MaxQuan=a[left[PowerTop]];
 		deal=min(MinQuan,MaxQuan);
