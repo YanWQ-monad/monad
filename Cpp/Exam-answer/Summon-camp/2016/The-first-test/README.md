@@ -1,12 +1,12 @@
 第一次测试
 ==========
-# 奇怪的手机
+## 奇怪的手机
 ### 题目描述
 	陈老师很穷，没钱买手机。
 	幸运的是他居然捡到了一个，陈老师非常高兴，这样他就可以向喜欢的女生发短信表白了！
 	然而这个手机有点奇怪。
 	我们都知道，老式的手机按键是这样子的：
-	![image](https://github.com/YanWQ-monad/monad/blob/master/Material/Image/mobitel.png)
+	![image](https://raw.githubusercontent.com/YanWQ-monad/monad/master/Material/Image/mobitel.png)
 	如果我们要发一个a，那么只需要按一下2。
 	如果我们要发一个b，那么需要按两下2。
 	如果我们需要连续发在同一个健上的字母，那么需要按一下#来隔开。
