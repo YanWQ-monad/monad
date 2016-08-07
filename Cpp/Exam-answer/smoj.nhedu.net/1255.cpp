@@ -1,5 +1,6 @@
 // 1255.cpp
 #include <cstdio>
+#include <ctime>
 #define min(x,y) ((x)<(y)? (x):(y))
 
 const int MAXN = 100010;
@@ -24,11 +25,9 @@ void LinkedRemove(int n) {
 	right[left[n]]=right[n];
 }
 void EnhancedSimulation() {
-	int MinQuan,MaxQuan,deal;
+	int deal;
 	while (diff>3) {
-		MinQuan=a[right[0]];
-		MaxQuan=a[left[PowerTop]];
-		deal=min(MinQuan,MaxQuan);
+		deal=min(a[right[0]],a[left[PowerTop]]);
 		a[right[right[0]]]+=deal;
 		a[left[left[PowerTop]]]+=deal;
 		a[right[0]]-=deal;
@@ -41,16 +40,14 @@ void EnhancedSimulation() {
 		if (!toWho) {
 			int minpower=right[0];
 			a[minpower]--;
-			int smin=right[minpower];
-			a[smin]++;
+			a[right[minpower]]++;
 			if (!a[minpower]) LinkedRemove(minpower);
 			toWho=true;
 		}
 		else {
 			int maxpower=left[PowerTop];
 			a[maxpower]--;
-			int smax=left[maxpower];
-			a[smax]++;
+			a[left[maxpower]]++;
 			if (!a[maxpower]) LinkedRemove(maxpower);
 			toWho=false;
 		}
