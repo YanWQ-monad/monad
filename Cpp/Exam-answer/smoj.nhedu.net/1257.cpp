@@ -26,14 +26,12 @@ void bfs(int temp) {
 			used[newbowl]=used[temp]+1;
 			p.push(newbowl);
 		}
-		//printf("%d\n",used[temp]);
 	}
 	puts("-1");
 }
 int main() {
 	freopen("1257.in","r",stdin);
 	freopen("1257.out","w",stdout);
-	//scanf("%d",&n);
 	int bowl=0;
 	for (int i=0,temp;i<MAXN;i++) {
 		scanf("%d",&temp);
