@@ -21,8 +21,8 @@ void work() {
 	}
 }
 int main() {
-	freopen("1256.in","r",stdin);
-	freopen("1256.out","w",stdout);
+	freopen("c.in","r",stdin);
+	freopen("c.out","w",stdout);
 	scanf("%d",&n);
 	for (int i=n-1;i>=0;i--)
 		scanf("%d",&s[i]);
