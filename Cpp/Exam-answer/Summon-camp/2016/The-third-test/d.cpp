@@ -3,7 +3,7 @@
 #include <cstdio>
 
 const int MAXN = 20;
-const int zs[7]={2,3,5,7,11,13,17};
+const int prime[7]={2,3,5,7,11,13,17};
 int r,a,b;
 double f[MAXN][2];
 
@@ -43,8 +43,8 @@ int main() {
 		f[0][0]=f[0][1]=1;
 		dp();
 		for (int i=0;i<7;i++) {
-			ans1+=f[zs[i]][0];
-			ans2+=f[zs[i]][1];
+			ans1+=f[prime[i]][0];
+			ans2+=f[prime[i]][1];
 		}
 		//printf("%lf\n",ans1+ans2-ans1*ans2);
 		printD(ans1+ans2-ans1*ans2);
