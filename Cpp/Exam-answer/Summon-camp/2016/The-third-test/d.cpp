@@ -6,31 +6,14 @@ const int MAXN = 20;
 const int prime[7]={2,3,5,7,11,13,17};
 int r,a,b;
 double f[MAXN][2];
-
 void dp() {
-	for (int i=1;i<=18;i++) {
-		double ft[MAXN][2];
-		memcpy(ft,f,sizeof(ft));
+	for (int i=1;i<=18;i++)
 		for (int j=i;j;j--) {
-			ft[j][0]+=f[j-1][0]*(double)(a)/100;
-			ft[j][1]+=f[j-1][1]*(double)(b)/100;
+			f[j][0]+=f[j-1][0]*(double)(a)/100;
+			f[j-1][0]-=f[j-1][0]*(double)(a)/100;
+			f[j][1]+=f[j-1][1]*(double)(b)/100;
+			f[j-1][1]-=f[j-1][1]*(double)(b)/100;
 		}
-		for (int j=i;j;j--) {
-			ft[j-1][0]-=f[j-1][0]*(double)(a)/100;
-			ft[j-1][1]-=f[j-1][1]*(double)(b)/100;
-		}
-		memcpy(f,ft,sizeof(f));
-	}
-}
-void printD(double n) {
-	char temp[20];
-	sprintf(temp,"%.16lf",n);
-	int p;
-	for (p=17;p>=0 && temp[p]=='0';p--);
-	if (temp[p]=='.') p++;
-	for (int i=0;i<=p;i++)
-		printf("%c",temp[i]);
-	puts("");
 }
 int main() {
 	freopen("d.in","r",stdin);
@@ -46,9 +29,7 @@ int main() {
 			ans1+=f[prime[i]][0];
 			ans2+=f[prime[i]][1];
 		}
-		//printf("%lf\n",ans1+ans2-ans1*ans2);
-		printD(ans1+ans2-ans1*ans2);
+		printf("%.16lf\n",ans1+ans2-ans1*ans2);
 	}
-	
 	return 0;
 }
