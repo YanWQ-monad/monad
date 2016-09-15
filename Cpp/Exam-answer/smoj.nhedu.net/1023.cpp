@@ -3,7 +3,7 @@
 #include <algorithm>
 using std::sort;
 
-int n,d[52],jlA,jlB;
+int n,d[53],jlA,jlB;
 int comp(const int a,const int b) {
 	return a>b;
 }
