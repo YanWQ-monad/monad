@@ -1,4 +1,4 @@
-// 1019.cpp
+// 1023.cpp
 #include <cstdio>
 #include <algorithm>
 using std::sort;
@@ -8,8 +8,8 @@ int comp(const int a,const int b) {
 	return a>b;
 }
 int main() {
-	freopen("1019.in","r",stdin);
-	freopen("1019.out","w",stdout);
+	freopen("1023.in","r",stdin);
+	freopen("1023.out","w",stdout);
 	scanf("%d",&n);
 	for (int i=0;i<n;i++)
 		scanf("%d",&d[i]);
