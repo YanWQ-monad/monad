@@ -1,7 +1,5 @@
 // 1135.cpp
-#include <algorithm>
 #include <cstdio>
-using std::max;
 
 int n,d[50],m;
 bool f[1002][1002];
