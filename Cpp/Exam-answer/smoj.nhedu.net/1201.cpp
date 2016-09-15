@@ -1,35 +1,33 @@
 // 1201.cpp
 #include <utility>
-#include <string>
+#include <cstring>
 #include <cstdio>
-using std::string;
 using std::pair;
 
-pair<string,int>p[101];
+pair<int,int>p[101];
 char Temp[21];
-int n,m,ans,o;
+int n,m,ans,o,f[(int)(1<<20)+1];
 bool check(int k) {
 	int same;
-	string temp;
-	for	(int i=0;i<m;i++) {
-		same=0;
-		temp=(p+i)->first;
-		for	(int j=0;j<n;j++)
-			if	(temp[j]=='1' && (k&(1<<(n-j-1)))>0)
-				same++;
-		if	(same!=(p+i)->second)	return false;
-	}
+	for	(int i=0;i<m;i++)
+		if	((f[(k&((p+i)->first))])!=(p+i)->second)	return false;
 	return true;
 }
 int main() {
 	freopen("1201.in","r",stdin);
 	freopen("1201.out","w",stdout);
 	scanf("%d %d",&n,&m);
-	for	(int i=0,temp;i<m;i++) {
-		scanf("%s %d",Temp,&temp);
-		(p+i)->first=Temp;
-		(p+i)->second=temp;
+	for	(int i=0,b,temp;i<m;i++) {
+		scanf("%s %d",Temp,&b);
+		temp=strlen(Temp);
+		for	(int j=0;j<temp;j++)
+			(p+i)->first+=(Temp[j]-'0')<<(temp-j-1);
+		(p+i)->second=b;
 	}
+	for	(int i=0;i<(1<<n);i++)
+		for	(int j=0;j<n;j++)
+			if	((i&(1<<j)))
+				f[i]++;
 	for	(int i=0;i<(1<<n);i++) {
 		if	(check(i))	{ans++;o=i;}
 		if	(ans>1)	{printf("NOT UNIQUE\n");return 0;}
