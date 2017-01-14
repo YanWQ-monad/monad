@@ -14,20 +14,18 @@ class mWinnerTree {
 	int ipos[MAX_LEN], apos[MAX_LEN];
  public:
 	void clear() {
-	//	for (int i=0; i<MAX_LEN; i++)
-	//		isNone[i] = true;
+		for (int i=0; i<MAX_LEN; i++)
+			isNone[i] = true;
 		for (int i=k; i<2*k; i++)
 			ipos[i] = apos[i] = i - k + 1;
 	}
-	mWinnerTree(const int size = 0) : len(size) , k(1){
-		for (int i=0; i<MAX_LEN; i++)
-			isNone[i] = true;
+	mWinnerTree(const int size = 0) : len(size), k(1){
 		while (k < size) k <<= 1;
 		clear();
 	}
 	void setLen(const int size) {
-		k = 1;
 		len = size;
+		k = 1;
 		while (k < size) k <<= 1;
 		clear();
 	}
@@ -58,7 +56,7 @@ class mWinnerTree {
 		}
 		return con;
 	}
-	T operator[](const int pos) {
+	T operator[](const int pos) const {
 		return ma[pos + k - 1];
 	}
 	bool exist(const int pos) const {
@@ -85,7 +83,7 @@ const int MAXC = 3000;
 mWinnerTree<int, MAXP*4> tree;
 
 struct EDGE {int n, t, l;} edge[MAXC];
-int n, p, c, cow[MAXN], dis[MAXP], ans=INF, cowin[MAXP], tot, head[MAXP];
+int n, p, c, cow[MAXN], dis[MAXP], ans=INF, head[MAXP];
 bool used[MAXP];
 
 void AddEdge(const int from, const int to, const int length) {
@@ -97,43 +95,45 @@ void AddEdge(const int from, const int to, const int length) {
 	CurEdge ++;
 }
 
-int Dijkstra(const int from) {
-	tree.edit(from, 0);
+int Dijkstra(const int start) {
+	memset(used, 0, sizeof(used));
+	tree.clear();
+	tree.edit(start, 0);
 	for (int trees=0; trees<p; trees++) {
-		int l = tree.min(), pos = tree.min_pos();
+		int vaule = tree.min(), pos = tree.min_pos();
 		tree.edit(pos, INF);
-		dis[pos] = l;
-		tot += dis[pos] * cowin[pos];
+		dis[pos] = vaule;
 		used[pos] = true;
-		for (int i=head[pos]; i!=-1; i=edge[i].t)
-			if (!used[edge[i].n] && (!tree.exist(edge[i].n) || l+edge[i].l<tree[edge[i].n]))
-				tree.edit(edge[i].n, l+edge[i].l);
+		for (int i=head[pos], to, dis; i!=-1; i=edge[i].t) {
+			to = edge[i].n;
+			dis = edge[i].l;
+			if (!used[to] && (!tree.exist(to) || vaule+dis<tree[to]))
+				tree.edit(to, vaule+dis);
+		}
 	}
 	return 0;
 }
 
 int main() {
-	freopen("1621.in" , "r", stdin );
-	freopen("1621.out", "w", stdout);
+	freopen("Temp.in" , "r", stdin );
+	freopen("Temp.out", "w", stdout);
 	for (int i=0; i<MAXP; i++)
 		head[i] = -1;
+
 	scanf("%d %d %d", &n, &p, &c);
 	tree.setLen(p);
-	for (int i=1; i<=n; i++) {
+	for (int i=1; i<=n; i++)
 		scanf("%d", &cow[i]);
-		cowin[cow[i]] ++;
-	}
 	for (int i=0, from, to, tdis; i<c; i++) {
 		scanf("%d %d %d", &from, &to, &tdis);
 		AddEdge(from,  to , tdis);
 		AddEdge( to , from, tdis);
 	}
 
-	for (int i=1; i<=p; i++) {
-		tot = 0;
-		memset(used, 0, sizeof(used));
-		tree.clear();
+	for (int i=1, j, tot; i<=p; i++) {
 		Dijkstra(i);
+		for (j=1, tot=0; j<=n; j++)
+			tot += dis[cow[j]];
 		ans = min(ans, tot);
 	}
 
@@ -141,3 +141,4 @@ int main() {
 
 	return 0;
 }
+
