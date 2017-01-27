@@ -14,7 +14,6 @@ class mHash {
     T con[MAXL];
     bool effe[MAXL];
     int hash(const int num) const {
-        // int pos = ((num ^ (num >> 16)) & (1 << 16)) % MAXL;
         int pos = num % MAXL;
         while (table[pos] != num && effe[pos]) {
             pos ++;
