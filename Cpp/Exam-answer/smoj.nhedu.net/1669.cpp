@@ -73,7 +73,7 @@ int main() {
 		stre.Update(1, d[i].x, d[i].x);
 		xtre.Update(1, d[i].x, 1);
 	}
-	printf("%I64d\n", ans);
+	printf("%lld\n", ans);
 
 	return 0;
 }
