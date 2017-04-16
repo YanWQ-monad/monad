@@ -4,7 +4,7 @@
 
 const int MAXN = 21;
 int n, len[MAXN], sca[MAXN], f[1<<MAXN][2], ap;
-bool u[MAXN];
+bool u[MAXN], d_u[1<<MAXN];
 
 void print() {
 	int cur = (1 << n) - 1;
@@ -20,10 +20,9 @@ void print() {
 }
 
 void dfs(const int set, const int value) {
-	if (f[set][0] != -1) return;
-	if (set == 0) {
-		f[set][0] = 0;
-	}
+	if (d_u[set]) return;
+	d_u[set] = true;
+	f[set][0] = 0;
 	for (int i=0; i<n; i++)
 		if (set&(1<<i)) {
 			if (value < sca[i]) continue;
