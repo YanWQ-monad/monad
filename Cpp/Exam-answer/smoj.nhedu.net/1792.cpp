@@ -5,7 +5,6 @@ const int MAXN = 17;
 bool win[MAXN][MAXN];
 char tmp[MAXN+3];
 int effe[MAXN] = { 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 };
-int coe[MAXN]  = { 0, 0, 2, 0, 8, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 32768 };
 int n, list[MAXN][1<<MAXN];
 long long f[MAXN][1<<MAXN];
 
@@ -51,7 +50,7 @@ int main() {
 	}
 
 	for (int i=0; i<n; i++)
-		printf("%lld\n", f[i][(1<<n)-1] * coe[n]);
+		printf("%lld\n", f[i][(1<<n)-1] * (1<<(n-1)));
 
 	return 0;
 }
