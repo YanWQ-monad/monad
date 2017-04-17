@@ -16,7 +16,7 @@ struct EDGE {
 }edge[MAXN*MAXF];
 struct QUER { int node, set; };
 EDGE* head[MAXN];
-int r, n, g, cost[MAXN][MAXF], f[MAXN][1<<MAXF], u[MAXF][MAXN][MAXN], curE;
+int r, n, g, cost[MAXN][MAXF], f[MAXN][1<<MAXF], u[MAXF][MAXN][MAXN], curE, cnt[1<<MAXF];
 
 void AddEdge(const int u, const int v, const int company) {
 	edge[curE].to = v;
@@ -28,7 +28,7 @@ void AddEdge(const int u, const int v, const int company) {
 
 int count(const int value) {
 	int ret = 0;
-	for (int i=0; i<g; i++)
+	for (int i=0; i<MAXF; i++)
 		ret += !!(value&(1<<i));
 	return ret;
 }
@@ -44,8 +44,6 @@ void init() {
 				::u[i][u][v] = false;
 	for (int i=0; i<n; i++)
 		head[i] = NULL;
-	for (int i=0; i<2*n; i++)
-		edge[i] = EDGE();
 }
 
 queue<QUER> q;
@@ -58,13 +56,13 @@ void SPFA() {
 		for (int i=0; i<g; i++)
 			if (!(now.set & (1 << i))) {
 				int new_set = now.set + (1 << i);
-				if (count(new_set) <= 3 && f[now.node][now.set] + cost[now.node][i] < f[now.node][new_set]) {
+				if (cnt[new_set] <= 3 && f[now.node][now.set] + cost[now.node][i] < f[now.node][new_set]) { // no more than 3 and can update
 					f[now.node][new_set] = f[now.node][now.set] + cost[now.node][i];
 					q.push((QUER){now.node, new_set});
 				}
 			}
 		for (EDGE *cur=head[now.node]; cur!=NULL; cur=cur->next)
-			if (u[cur->comp][now.node][cur->to] && now.set&(1<<cur->comp) && f[now.node][now.set] < f[cur->to][now.set-(1<<cur->comp)]) {
+			if (u[cur->comp][now.node][cur->to] && now.set&(1<<cur->comp) && f[now.node][now.set] < f[cur->to][now.set-(1<<cur->comp)]) { /* has ticket and can update */
 				f[cur->to][now.set-(1<<cur->comp)] = f[now.node][now.set];
 				q.push((QUER){cur->to, now.set-(1<<cur->comp)});
 			}
@@ -75,6 +73,8 @@ int main() {
 	freopen("1797.in" , "r", stdin );
 	freopen("1797.out", "w", stdout);
 
+	for (int i=0; i<(1<<MAXF); i++)
+		cnt[i] = count(i);
 	scanf("%d", &r);
 	while (r--) {
 		scanf("%d %d", &n, &g);
