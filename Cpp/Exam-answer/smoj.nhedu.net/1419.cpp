@@ -10,6 +10,7 @@ struct EDGE {
 	int to;
 	EDGE *next;
 };
+
 template <int MAXV, int MAXL>
 class EDGES {
 private:
