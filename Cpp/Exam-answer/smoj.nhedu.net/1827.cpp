@@ -64,15 +64,13 @@ int main() {
 		for (int bgn=1; bgn<i; bgn++) {
 			const int dif = num[i] - num[bgn];
 			const int del = i - bgn - 1;
-			if (del + bgn - 1 < f[i].GetData(dif)) {
+			if (del + bgn - 1 < f[i].GetData(dif))
 				f[i].setData(dif, del + bgn - 1);
-			}
 			if (bgn != 1)
 				if (f[bgn].exist(dif)) {
 					int last = f[bgn].GetData(dif);
-					if (last + del < f[i].GetData(dif)) {
+					if (last + del < f[i].GetData(dif))
 						f[i].setData(dif, last + del);
-					}
 				}
 		}
 	}
