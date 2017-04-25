@@ -34,16 +34,16 @@ public:
 const int MAXN = 50010;
 const int MAXM = 60010;
 mEdges<MAXN, MAXM> edge, topo;
-int r, n, m, stap[MAXN], dfn[MAXN], low[MAXN], cnt=0, belong[MAXN], stop=0, Bcnt=0, topo_stack[MAXN], stack_pos;
+int r, n, m, stap[MAXN], dfn[MAXN], low[MAXN], cnt=0, belong[MAXN], stop=0, Bcnt=0, topo_stack[MAXN], stack_pos, in[MAXN], out[MAXN], zero;
 bool instack[MAXN], visit[MAXN], ans;
 
 void init() {
 	edge.clear();
 	topo.clear();
 	ans = true;
-	cnt = stop = Bcnt = stack_pos = 0;
+	zero = cnt = stop = Bcnt = stack_pos = 0;
 	for (int i=0; i<MAXN; i++) {
-		topo_stack[i] = belong[i] = stap[i] = dfn[i] = low[i] = 0;
+		in[i] = out[i] = topo_stack[i] = belong[i] = stap[i] = dfn[i] = low[i] = 0;
 		visit[i] = instack[i] = false;
 	}
 }
@@ -98,20 +98,31 @@ int main() {
 			if (!dfn[i])
 				tarjan(i);
 
+		zero = Bcnt;
 		for (int i=1; i<=n; i++)
 			for (const EDGE *ce=edge.enumNode(i); ce; ce=ce->next)
-				if (belong[i] != belong[ce->to])
+				if (belong[i] != belong[ce->to]) {
 					topo.AddEdge(belong[i], belong[ce->to]);
+					if (!in[belong[ce->to]]) zero--;
+					in [belong[ce->to]] ++;
+					out[belong[  i   ]] ++;
+				}
 
 		for (int i=1; i<=Bcnt; i++)
 			if (!visit[i])
 				topo_sort(i);
 
-		for (int i=1; i<stack_pos; i++)
-			if (topo.enumNode(topo_stack[i]) == NULL) {
-				ans = false;
-				break;
+		if (zero >= 2) ans = false;
+		for (int i=stack_pos-1, v; i>=0 && ans; i--) {
+			v = topo_stack[i];
+			for (const EDGE *ce=topo.enumNode(v); ce; ce=ce->next) {
+				out[  v   ] --;
+				in [ce->to] --;
+				if (!in[ce->to]) zero ++;
 			}
+			if (!in[v])    zero --;
+			if (zero >= 2) ans = false;
+		}
 		puts(ans? "Yes":"No");
 	}
 
