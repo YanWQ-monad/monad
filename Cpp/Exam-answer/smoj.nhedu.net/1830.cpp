@@ -34,7 +34,7 @@ public:
 const int MAXN = 50010;
 const int MAXM = 60010;
 mEdges<MAXN, MAXM> edge, topo;
-int r, n, m, stap[MAXN], dfn[MAXN], low[MAXN], cnt=0, belong[MAXN], stop=0, Bcnt=0, topo_stack[MAXN], stack_pos, in[MAXN], out[MAXN], zero;
+int r, n, m, stap[MAXN], dfn[MAXN], low[MAXN], cnt, belong[MAXN], stop, Bcnt, topo_stack[MAXN], stack_pos, in[MAXN], out[MAXN], zero;
 bool instack[MAXN], visit[MAXN], ans;
 
 void init() {
